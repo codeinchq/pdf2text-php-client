@@ -1,2 +1,69 @@
-# pdf2text-php-client
-PHP client for the pdf2text API
+# pdf2txt PHP client
+
+This repository contains a PHP 8.2+ library for converting PDF files to images using the [pdf2txt](https://github.com/codeinchq/pdf2txt) service.
+
+## Installation
+
+The recommended way to install the library is through [Composer](http://getcomposer.org):
+
+```bash
+composer require codeinc/pdf2txt-client
+```
+
+## Usage
+
+This client requires a running instance of the [pdf2text](https://github.com/codeinchq/pdf2text) service. The service can be run locally [using Docker](https://hub.docker.com/r/codeinchq/pdf2text) or deployed to a server.
+
+Base example: 
+```php
+use CodeInc\Pdf2TextClient\Pdf2TextClient;
+use CodeInc\Pdf2TextClient\Exception;
+
+$apiBaseUri = 'http://localhost:3000/';
+$localPdfPath = '/path/to/local/file.pdf';
+
+try {
+    // convert
+    $client = new Pdf2TextClient($apiBaseUri);
+    $stream = $client->convertLocalFile($localPdfPath);
+    
+    // display the text
+    echo (string)$stream;
+}
+catch (Exception $e) {
+    // handle exception
+}
+```
+
+With options:
+
+```php
+use CodeInc\Pdf2TextClient\Pdf2TextClient;
+use CodeInc\Pdf2TextClient\ConvertOptions;
+use CodeInc\Pdf2TextClient\Format;
+
+$apiBaseUri = 'http://localhost:3000/';
+$localPdfPath = '/path/to/local/file.pdf';
+$convertOption = new ConvertOptions(
+    firstPage: 2,
+    lastPage: 3,
+    format: Format::json
+);
+
+try {
+    // convert 
+    $client = new Pdf2TextClient($apiBaseUri);
+    $jsonResponse = $client->convertLocalFile($localPdfPath, $convertOption);
+    $decodedJson = $client->processJsonResponse($jsonResponse);
+    
+   // display the text in a JSON format
+   var_dump($decodedJson); 
+}
+catch (Exception $e) {
+    // handle exception
+}
+```
+
+## License
+
+The library is published under the MIT license (see [`LICENSE`](LICENSE) file).

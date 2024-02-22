@@ -1,0 +1,5 @@
+services:
+  pdf2txt:
+    image: codeinchq/pdf2txt:latest
+    ports:
+      - "3000:3000"
