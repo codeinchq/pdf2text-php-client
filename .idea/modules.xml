@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/pdf2text-php-client.iml" filepath="$PROJECT_DIR$/.idea/pdf2text-php-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pdf2txt-php-client.iml" filepath="$PROJECT_DIR$/.idea/pdf2txt-php-client.iml" />
     </modules>
   </component>
 </project>

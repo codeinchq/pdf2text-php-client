@@ -1,8 +1,8 @@
 {
-  "name": "codeinc/pdf2text-client",
+  "name": "codeinc/pdf2txt-client",
   "version": "v1.0",
-  "description": "A PHP client for the pdf2text service",
-  "homepage": "https://github.com/codeinchq/pdf2text-php-client",
+  "description": "A PHP client for the pdf2txt service",
+  "homepage": "https://github.com/codeinchq/pdf2txt-php-client",
   "type": "library",
   "license": "MIT",
   "require": {
@@ -14,12 +14,12 @@
   },
   "autoload": {
     "psr-4": {
-      "CodeInc\\Pdf2TextClient\\": "src"
+      "CodeInc\\Pdf2TxtClient\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "CodeInc\\Pdf2TextClient\\Tests\\": "tests/"
+      "CodeInc\\Pdf2TxtClient\\Tests\\": "tests/"
     }
   },
   "authors": [

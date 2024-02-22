@@ -12,19 +12,19 @@ composer require codeinc/pdf2txt-client
 
 ## Usage
 
-This client requires a running instance of the [pdf2text](https://github.com/codeinchq/pdf2text) service. The service can be run locally [using Docker](https://hub.docker.com/r/codeinchq/pdf2text) or deployed to a server.
+This client requires a running instance of the [pdf2txt](https://github.com/codeinchq/pdf2txt) service. The service can be run locally [using Docker](https://hub.docker.com/r/codeinchq/pdf2txt) or deployed to a server.
 
-Base example: 
+### Base example: 
 ```php
-use CodeInc\Pdf2TextClient\Pdf2TextClient;
-use CodeInc\Pdf2TextClient\Exception;
+use CodeInc\Pdf2TxtClient\Pdf2TxtClient;
+use CodeInc\Pdf2TxtClient\Exception;
 
 $apiBaseUri = 'http://localhost:3000/';
 $localPdfPath = '/path/to/local/file.pdf';
 
 try {
     // convert
-    $client = new Pdf2TextClient($apiBaseUri);
+    $client = new Pdf2TxtClient($apiBaseUri);
     $stream = $client->convertLocalFile($localPdfPath);
     
     // display the text
@@ -35,12 +35,11 @@ catch (Exception $e) {
 }
 ```
 
-With options:
-
+### With options:
 ```php
-use CodeInc\Pdf2TextClient\Pdf2TextClient;
-use CodeInc\Pdf2TextClient\ConvertOptions;
-use CodeInc\Pdf2TextClient\Format;
+use CodeInc\Pdf2TxtClient\Pdf2TxtClient;
+use CodeInc\Pdf2TxtClient\ConvertOptions;
+use CodeInc\Pdf2TxtClient\Format;
 
 $apiBaseUri = 'http://localhost:3000/';
 $localPdfPath = '/path/to/local/file.pdf';
@@ -52,7 +51,7 @@ $convertOption = new ConvertOptions(
 
 try {
     // convert 
-    $client = new Pdf2TextClient($apiBaseUri);
+    $client = new Pdf2TxtClient($apiBaseUri);
     $jsonResponse = $client->convertLocalFile($localPdfPath, $convertOption);
     $decodedJson = $client->processJsonResponse($jsonResponse);
     

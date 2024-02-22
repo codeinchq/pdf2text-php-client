@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace CodeInc\Pdf2TextClient;
+namespace CodeInc\Pdf2TxtClient;
 
 /**
- * pdf2text convert options.
+ * pdf2txt convert options.
  *
- * @see https://github.com/codeinchq/pdf2text?tab=readme-ov-file#usage
+ * @see https://github.com/codeinchq/pdf2txt?tab=readme-ov-file#usage
  */
 final readonly class ConvertOptions
 {

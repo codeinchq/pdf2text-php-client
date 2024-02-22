@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CodeInc\Pdf2TextClient;
+namespace CodeInc\Pdf2TxtClient;
 
 enum Format
 {

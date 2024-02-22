@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace CodeInc\Pdf2TextClient;
+namespace CodeInc\Pdf2TxtClient;
 
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
@@ -21,7 +21,7 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 
-class Pdf2TextClient
+class Pdf2TxtClient
 {
     public function __construct(
         private readonly string $baseUrl,
@@ -57,7 +57,7 @@ class Pdf2TextClient
                 )
                 ->addResource('firstPage', (string)$options->firstPage)
                 ->addResource('normalizeWhitespace', (string)$options->normalizeWhitespace)
-                ->addResource('raw', $options->format === Format::text ? 'true' : 'false');
+                ->addResource('format', $options->format->name);
 
             if ($options->lastPage !== null) {
                 $multipartStreamBuilder->addResource('lastPage', (string)$options->lastPage);
