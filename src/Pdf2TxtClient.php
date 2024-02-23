@@ -50,7 +50,7 @@ class Pdf2TxtClient
      * @return StreamInterface
      * @throws Exception
      */
-    public function convert(mixed $stream, ConvertOptions $options = new ConvertOptions()): StreamInterface
+    public function extract(mixed $stream, ConvertOptions $options = new ConvertOptions()): StreamInterface
     {
         try {
             // building the multipart stream
@@ -129,7 +129,7 @@ class Pdf2TxtClient
      * @return StreamInterface
      * @throws Exception
      */
-    public function convertLocalFile(string $pdfPath, ConvertOptions $options = new ConvertOptions()): StreamInterface
+    public function extractFromLocalFile(string $pdfPath, ConvertOptions $options = new ConvertOptions()): StreamInterface
     {
         $f = fopen($pdfPath, 'r');
         if ($f === false) {
@@ -139,7 +139,7 @@ class Pdf2TxtClient
             );
         }
 
-        return $this->convert($f, $options);
+        return $this->extract($f, $options);
     }
 
     /**
@@ -153,6 +153,6 @@ class Pdf2TxtClient
         if (!str_ends_with($url, '/')) {
             $url .= '/';
         }
-        return "{$url}convert";
+        return "{$url}extract";
     }
 }

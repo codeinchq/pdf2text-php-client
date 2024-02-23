@@ -19,6 +19,11 @@ use JsonException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 
+/**
+ * Class Pdf2TxtClientTest
+ *
+ * @see Pdf2TxtClient
+ */
 final class Pdf2TxtClientTest extends TestCase
 {
     private const string DEFAULT_PDF2TEXT_BASE_URL = 'http://localhost:3000';
@@ -27,11 +32,11 @@ final class Pdf2TxtClientTest extends TestCase
     private const string TEST_PDF_RESULT_JSON = __DIR__.'/assets/file.json';
 
     /**
-     * @throws Exception|JsonException
+     * @throws Exception
      */
-    public function testConvertLocalFileToText(): void
+    public function testExtractionFromLocalFileToText(): void
     {
-        $stream = $this->getNewClient()->convertLocalFile(self::TEST_PDF_PATH);
+        $stream = $this->getNewClient()->extractFromLocalFile(self::TEST_PDF_PATH);
         $this->assertInstanceOf(StreamInterface::class, $stream, "The stream is not valid");
 
         $text = (string)$stream;
@@ -40,12 +45,12 @@ final class Pdf2TxtClientTest extends TestCase
     }
 
     /**
-     * @throws Exception|JsonException
+     * @throws Exception
      */
-    public function testConvertLocalFileToRawJson(): void
+    public function testExtractionFromLocalFileToRawJson(): void
     {
         $client = $this->getNewClient();
-        $stream = $client->convertLocalFile(self::TEST_PDF_PATH, new ConvertOptions(format: Format::json));
+        $stream = $client->extractFromLocalFile(self::TEST_PDF_PATH, new ConvertOptions(format: Format::json));
         $this->assertInstanceOf(StreamInterface::class, $stream, "The stream is not valid");
 
         $rawJson = (string)$stream;
@@ -56,10 +61,10 @@ final class Pdf2TxtClientTest extends TestCase
     /**
      * @throws Exception|JsonException
      */
-    public function testConvertLocalFileToProcessedJson(): void
+    public function testExtractionFromLocalFileToProcessedJson(): void
     {
         $client = $this->getNewClient();
-        $stream = $client->convertLocalFile(self::TEST_PDF_PATH, new ConvertOptions(format: Format::json));
+        $stream = $client->extractFromLocalFile(self::TEST_PDF_PATH, new ConvertOptions(format: Format::json));
         $this->assertInstanceOf(StreamInterface::class, $stream, "The stream is not valid");
 
         $json = $client->processJsonResponse($stream);
