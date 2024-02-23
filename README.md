@@ -1,6 +1,6 @@
 # pdf2txt PHP client
 
-This repository contains a PHP 8.2+ library for converting PDF files to images using the [pdf2txt](https://github.com/codeinchq/pdf2txt) service.
+This repository contains a PHP 8.2+ library for converting PDF files to text using the [pdf2txt](https://github.com/codeinchq/pdf2txt) service.
 
 ## Installation
 
