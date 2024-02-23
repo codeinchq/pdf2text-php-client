@@ -21,6 +21,14 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 
+/**
+ * Class Pdf2TxtClient
+ *
+ * @package CodeInc\Pdf2TxtClient
+ * @link https://github.com/codeinchq/pdf2txt
+ * @link https://github.com/codeinchq/pdf2txt-php-client
+ * @license https://opensource.org/licenses/MIT MIT
+ */
 class Pdf2TxtClient
 {
     public function __construct(
