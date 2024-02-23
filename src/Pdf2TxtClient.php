@@ -119,7 +119,7 @@ class Pdf2TxtClient
      * @param string $pdfPath
      * @param ConvertOptions $options
      * @return StreamInterface
-     * @throws Exception|JsonException
+     * @throws Exception
      */
     public function convertLocalFile(string $pdfPath, ConvertOptions $options = new ConvertOptions()): StreamInterface
     {
