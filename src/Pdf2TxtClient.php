@@ -154,7 +154,10 @@ class Pdf2TxtClient
             throw new Exception("The file '$path' could not be opened", Exception::ERROR_FILE_OPEN);
         }
 
-        stream_copy_to_stream($stream->detach(), $f);
+        if (stream_copy_to_stream($stream->detach(), $f) === false) {
+            throw new Exception("The stream could not be copied to the file '$path'", Exception::ERROR_FILE_WRITE);
+        }
+
         fclose($f);
     }
 
