@@ -91,7 +91,6 @@ try {
     
     // save the text to a file
     $client->saveStreamToFile($stream, $destinationTextPath);
-    
 }
 catch (Exception $e) {
     // handle exception
