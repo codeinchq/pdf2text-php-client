@@ -36,7 +36,9 @@ final class Pdf2TxtClientTest extends TestCase
      */
     public function testExtractionFromLocalFileToText(): void
     {
-        $stream = $this->getNewClient()->extractFromLocalFile(self::TEST_PDF_PATH);
+        $client = $this->getNewClient();
+
+        $stream = $client->extract($client->createStreamFromFile(self::TEST_PDF_PATH));
         $this->assertInstanceOf(StreamInterface::class, $stream, "The stream is not valid");
 
         $text = (string)$stream;
@@ -50,7 +52,11 @@ final class Pdf2TxtClientTest extends TestCase
     public function testExtractionFromLocalFileToRawJson(): void
     {
         $client = $this->getNewClient();
-        $stream = $client->extractFromLocalFile(self::TEST_PDF_PATH, new ConvertOptions(format: Format::json));
+
+        $stream = $client->extract(
+            $client->createStreamFromFile(self::TEST_PDF_PATH),
+            new ConvertOptions(format: Format::json)
+        );
         $this->assertInstanceOf(StreamInterface::class, $stream, "The stream is not valid");
 
         $rawJson = (string)$stream;
@@ -64,7 +70,11 @@ final class Pdf2TxtClientTest extends TestCase
     public function testExtractionFromLocalFileToProcessedJson(): void
     {
         $client = $this->getNewClient();
-        $stream = $client->extractFromLocalFile(self::TEST_PDF_PATH, new ConvertOptions(format: Format::json));
+
+        $stream = $client->extract(
+            $client->createStreamFromFile(self::TEST_PDF_PATH),
+            new ConvertOptions(format: Format::json)
+        );
         $this->assertInstanceOf(StreamInterface::class, $stream, "The stream is not valid");
 
         $json = $client->processJsonResponse($stream);
