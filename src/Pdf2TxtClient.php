@@ -122,24 +122,40 @@ class Pdf2TxtClient
     }
 
     /**
-     * Converts a local PDF file to text using the PDF2TEXT API.
+     * Opens a local file and creates a stream from it.
      *
-     * @param string $pdfPath
-     * @param ConvertOptions $options
+     * @param string $path The path to the file.
+     * @param string $openMode The mode used to open the file.
      * @return StreamInterface
      * @throws Exception
      */
-    public function extractFromLocalFile(string $pdfPath, ConvertOptions $options = new ConvertOptions()): StreamInterface
+    public function createStreamFromFile(string $path, string $openMode = 'r'): StreamInterface
     {
-        $f = fopen($pdfPath, 'r');
+        $f = fopen($path, $openMode);
         if ($f === false) {
-            throw new Exception(
-                message: "The file '$pdfPath' could not be opened",
-                code: Exception::ERROR_LOCAL_FILE
-            );
+            throw new Exception("The file '$path' could not be opened", Exception::ERROR_FILE_OPEN);
         }
 
-        return $this->extract($f, $options);
+        return $this->streamFactory->createStreamFromResource($f);
+    }
+
+    /**
+     * Saves a stream to a local file.
+     *
+     * @param StreamInterface $stream
+     * @param string $path The path to the file.
+     * @param string $openMode The mode used to open the file.
+     * @throws Exception
+     */
+    public function saveStreamToFile(StreamInterface $stream, string $path, string $openMode = 'w'): void
+    {
+        $f = fopen($path, $openMode);
+        if ($f === false) {
+            throw new Exception("The file '$path' could not be opened", Exception::ERROR_FILE_OPEN);
+        }
+
+        stream_copy_to_stream($stream->detach(), $f);
+        fclose($f);
     }
 
     /**
