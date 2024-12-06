@@ -1,4 +1,4 @@
-# pdf2txt PHP client
+# Pdf2Txt PHP client
 
 This repository contains a PHP 8.2+ library for converting PDF files to text using the [pdf2txt](https://github.com/codeinchq/pdf2txt) service.
 
