@@ -1,6 +1,6 @@
 {
   "name": "codeinc/pdf2txt-client",
-  "version": "v1.11",
+  "version": "v1.12",
   "description": "A PHP client for the pdf2txt service",
   "homepage": "https://github.com/codeinchq/pdf2txt-php-client",
   "type": "library",
