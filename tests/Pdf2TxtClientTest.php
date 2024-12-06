@@ -28,8 +28,8 @@ final class Pdf2TxtClientTest extends TestCase
 {
     private const string DEFAULT_PDF2TEXT_BASE_URL = 'http://localhost:3000';
     private const string TEST_PDF_PATH = __DIR__.'/assets/file.pdf';
-    private const string TEST_PDF_RESULT_TXT = '/tmp/file.txt';
-    private const string TEST_PDF_RESULT_JSON = '/tmp/file.json';
+    private const string TEST_PDF_RESULT_TXT = __DIR__.'/assets/file.txt';
+    private const string TEST_PDF_RESULT_JSON = __DIR__.'/assets/file.json';
 
     public function testHealth(): void
     {
