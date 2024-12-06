@@ -1,5 +1,7 @@
 # Pdf2Txt PHP client
 
+![Tests](https://github.com/codeinchq/pdf2txt-php-client/actions/workflows/phpunit.yml/badge.svg)
+
 This repository contains a PHP 8.2+ library for converting PDF files to text using the [pdf2txt](https://github.com/codeinchq/pdf2txt) service.
 
 ## Installation
