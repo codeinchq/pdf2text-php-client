@@ -11,12 +11,14 @@ declare(strict_types=1);
 
 namespace CodeInc\Pdf2TxtClient\Tests;
 
+use CodeInc\Office2PdfClient\Office2PdfClient;
 use CodeInc\Pdf2TxtClient\ConvertOptions;
 use CodeInc\Pdf2TxtClient\Exception;
 use CodeInc\Pdf2TxtClient\Format;
 use CodeInc\Pdf2TxtClient\Pdf2TxtClient;
 use JsonException;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
@@ -30,6 +32,21 @@ final class Pdf2TxtClientTest extends TestCase
     private const string TEST_PDF_PATH = __DIR__.'/assets/file.pdf';
     private const string TEST_PDF_RESULT_TXT = __DIR__.'/assets/file.txt';
     private const string TEST_PDF_RESULT_JSON = __DIR__.'/assets/file.json';
+
+    public function testHealth(): void
+    {
+        // testing a healthy service
+        $client = $this->getNewClient();
+        $this->assertNotFalse($client->checkServiceHealth(), "The service is not healthy.");
+
+        // testing a non-existing service
+        $client = new Pdf2TxtClient('https://example.com');
+        $this->assertFalse($client->checkServiceHealth(), "The service is healthy.");
+
+        // testing a non-existing url
+        $client = new Pdf2TxtClient('https://example-NQrkB6F6MwuXesMrBhqx.com');
+        $this->assertFalse($client->checkServiceHealth(), "The service is healthy.");
+    }
 
     /**
      * @throws Exception
