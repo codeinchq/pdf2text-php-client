@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  phpunit:
     runs-on: ubuntu-latest
     env:
       PDF2TEXT_BASE_URL: http://pdf2txt:3000
