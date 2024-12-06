@@ -11,14 +11,12 @@ declare(strict_types=1);
 
 namespace CodeInc\Pdf2TxtClient\Tests;
 
-use CodeInc\Office2PdfClient\Office2PdfClient;
 use CodeInc\Pdf2TxtClient\ConvertOptions;
 use CodeInc\Pdf2TxtClient\Exception;
 use CodeInc\Pdf2TxtClient\Format;
 use CodeInc\Pdf2TxtClient\Pdf2TxtClient;
 use JsonException;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
