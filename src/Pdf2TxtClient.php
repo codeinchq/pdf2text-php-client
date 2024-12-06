@@ -22,31 +22,43 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
- * Class Pdf2TxtClient
+ * Class Pdf2TxtClient provides a simple way to interact with the Pdf2Txt API.
  *
  * @package CodeInc\Pdf2TxtClient
- * @link https://github.com/codeinchq/pdf2txt
- * @link https://github.com/codeinchq/pdf2txt-php-client
+ * @link    https://github.com/codeinchq/pdf2txt
+ * @link    https://github.com/codeinchq/pdf2txt-php-client
  * @license https://opensource.org/licenses/MIT MIT
  */
-class Pdf2TxtClient
+readonly class Pdf2TxtClient
 {
+    public ClientInterface $client;
+    public StreamFactoryInterface $streamFactory;
+    public RequestFactoryInterface $requestFactory;
+
+    /**
+     * Pdf2TxtClient constructor.
+     *
+     * @param string $baseUrl
+     * @param ClientInterface|null $client
+     * @param StreamFactoryInterface|null $streamFactory
+     * @param RequestFactoryInterface|null $requestFactory
+     */
     public function __construct(
-        private readonly string $baseUrl,
-        private ClientInterface|null $client = null,
-        private StreamFactoryInterface|null $streamFactory = null,
-        private RequestFactoryInterface|null $requestFactory = null,
+        private string $baseUrl,
+        ClientInterface|null $client = null,
+        StreamFactoryInterface|null $streamFactory = null,
+        RequestFactoryInterface|null $requestFactory = null,
     ) {
-        $this->client ??= Psr18ClientDiscovery::find();
-        $this->streamFactory ??= Psr17FactoryDiscovery::findStreamFactory();
-        $this->requestFactory ??= Psr17FactoryDiscovery::findRequestFactory();
+        $this->client = $client ?? Psr18ClientDiscovery::find();
+        $this->streamFactory = $streamFactory ?? Psr17FactoryDiscovery::findStreamFactory();
+        $this->requestFactory ??= $requestFactory ?? Psr17FactoryDiscovery::findRequestFactory();
     }
 
     /**
      * Converts a PDF to text using streams and the PDF2TEXT API.
      *
      * @param StreamInterface|resource|string $stream The PDF content.
-     * @param ConvertOptions $options The convert options.
+     * @param ConvertOptions $options                 The convert options.
      * @return StreamInterface
      * @throws Exception
      */
@@ -119,46 +131,6 @@ class Pdf2TxtClient
             associative: true,
             flags: JSON_THROW_ON_ERROR
         );
-    }
-
-    /**
-     * Opens a local file and creates a stream from it.
-     *
-     * @param string $path The path to the file.
-     * @param string $openMode The mode used to open the file.
-     * @return StreamInterface
-     * @throws Exception
-     */
-    public function createStreamFromFile(string $path, string $openMode = 'r'): StreamInterface
-    {
-        $f = fopen($path, $openMode);
-        if ($f === false) {
-            throw new Exception("The file '$path' could not be opened", Exception::ERROR_FILE_OPEN);
-        }
-
-        return $this->streamFactory->createStreamFromResource($f);
-    }
-
-    /**
-     * Saves a stream to a local file.
-     *
-     * @param StreamInterface $stream
-     * @param string $path The path to the file.
-     * @param string $openMode The mode used to open the file.
-     * @throws Exception
-     */
-    public function saveStreamToFile(StreamInterface $stream, string $path, string $openMode = 'w'): void
-    {
-        $f = fopen($path, $openMode);
-        if ($f === false) {
-            throw new Exception("The file '$path' could not be opened", Exception::ERROR_FILE_OPEN);
-        }
-
-        if (stream_copy_to_stream($stream->detach(), $f) === false) {
-            throw new Exception("The stream could not be copied to the file '$path'", Exception::ERROR_FILE_WRITE);
-        }
-
-        fclose($f);
     }
 
     /**

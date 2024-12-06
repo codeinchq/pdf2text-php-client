@@ -38,7 +38,7 @@ final class Pdf2TxtClientTest extends TestCase
     {
         $client = $this->getNewClient();
 
-        $stream = $client->extract($client->createStreamFromFile(self::TEST_PDF_PATH));
+        $stream = $client->extract($client->streamFactory->createStreamFromFile(self::TEST_PDF_PATH));
         $this->assertInstanceOf(StreamInterface::class, $stream, "The stream is not valid");
 
         $text = (string)$stream;
@@ -54,7 +54,7 @@ final class Pdf2TxtClientTest extends TestCase
         $client = $this->getNewClient();
 
         $stream = $client->extract(
-            $client->createStreamFromFile(self::TEST_PDF_PATH),
+            $client->streamFactory->createStreamFromFile(self::TEST_PDF_PATH),
             new ConvertOptions(format: Format::json)
         );
         $this->assertInstanceOf(StreamInterface::class, $stream, "The stream is not valid");
@@ -72,7 +72,7 @@ final class Pdf2TxtClientTest extends TestCase
         $client = $this->getNewClient();
 
         $stream = $client->extract(
-            $client->createStreamFromFile(self::TEST_PDF_PATH),
+            $client->streamFactory->createStreamFromFile(self::TEST_PDF_PATH),
             new ConvertOptions(format: Format::json)
         );
         $this->assertInstanceOf(StreamInterface::class, $stream, "The stream is not valid");
