@@ -1,5 +1,5 @@
 # Pdf2Txt PHP client
-
+[![Code Inc.](https://img.shields.io/badge/Code%20Inc.-Pdf2Txt-blue)](https://github.com/codeinchq/pdf2txt)
 ![Tests](https://github.com/codeinchq/pdf2txt-php-client/actions/workflows/phpunit.yml/badge.svg)
 
 This repository contains a PHP 8.2+ library for converting PDF files to text using the [pdf2txt](https://github.com/codeinchq/pdf2txt) service.
